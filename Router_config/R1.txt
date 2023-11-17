@@ -1,0 +1,117 @@
+Current configuration : 1356 bytes
+!
+upgrade fpd auto
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging monitor informational
+enable secret 5 $1$4kVG$ou/jQExRhL3M3cKU/0twF1
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+ip domain name equipo3.local
+ip cef
+login on-failure log
+login on-success log
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username netadmin privilege 15 secret 5 $1$NOC2$7aewolZOy6B5Q4CnIBY/b/
+!
+redundancy
+!
+!
+ip ssh logging events
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet1/0
+ ip address 3.3.0.1 255.255.255.252
+ duplex half
+!
+interface Ethernet1/1
+ ip address 3.3.0.5 255.255.255.252
+ duplex half
+!
+interface Ethernet1/2
+ ip address 3.3.0.9 255.255.255.252
+ duplex half
+!
+interface Ethernet1/3
+ ip address dhcp
+ duplex half
+!
+router ospf 1
+ router-id 1.1.1.3
+ network 3.3.0.0 0.0.0.3 area 0
+ network 3.3.0.4 0.0.0.3 area 0
+ network 3.3.0.8 0.0.0.3 area 0
+ network 192.168.60.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+mgcp profile default
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end
+
