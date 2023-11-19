@@ -1,4 +1,4 @@
-Current configuration : 1356 bytes
+Current configuration : 1370 bytes
 !
 upgrade fpd auto
 version 15.2
@@ -73,7 +73,7 @@ interface Ethernet1/2
  duplex half
 !
 interface Ethernet1/3
- ip address dhcp
+ ip address 3.3.0.34 255.255.255.252
  duplex half
 !
 router ospf 1
@@ -81,7 +81,7 @@ router ospf 1
  network 3.3.0.0 0.0.0.3 area 0
  network 3.3.0.4 0.0.0.3 area 0
  network 3.3.0.8 0.0.0.3 area 0
- network 192.168.60.0 0.0.0.255 area 0
+ network 3.3.0.32 0.0.0.3 area 0
 !
 ip forward-protocol nd
 no ip http server
@@ -114,4 +114,3 @@ line vty 0 4
 !
 !
 end
-

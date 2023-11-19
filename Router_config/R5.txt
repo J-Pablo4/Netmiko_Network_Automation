@@ -1,4 +1,4 @@
-Current configuration : 1071 bytes
+Current configuration : 1237 bytes
 !
 upgrade fpd auto
 version 15.2
@@ -6,12 +6,13 @@ service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
 !
-hostname Router
+hostname R5
 !
 boot-start-marker
 boot-end-marker
 !
 !
+enable secret 5 $1$ZnvC$pvJLADLLJG.tBNz7t7MPS0
 !
 no aaa new-model
 !
@@ -20,6 +21,7 @@ no aaa new-model
 !
 !
 !
+ip domain name equipo3.local
 ip cef
 no ipv6 cef
 !
@@ -33,10 +35,12 @@ multilink bundle-name authenticated
 !
 !
 !
+username netadmin privilege 15 secret 5 $1$z66d$veQQovZ7zeXe5tAhCc7aN0
 !
 redundancy
 !
 !
+ip ssh version 2
 !
 !
 !
@@ -101,8 +105,8 @@ line con 0
 line aux 0
  stopbits 1
 line vty 0 4
- login
- transport input all
+ login local
+ transport input ssh
 !
 !
 end
