@@ -1,5 +1,6 @@
 from netmiko import ConnectHandler
 
+
 # Is capable of sending commands and marking where the error is in the command
 def sendCommand(config_commands, router):
     try:
@@ -15,28 +16,15 @@ def sendCommand(config_commands, router):
     except Exception as e:
         print(f"Error: {e}")
 
-
-
-def find_device(device_name, device_list):
-
-    if device_name in device_list:
-        # Access the 'host' attribute for the specified device
-        host_value = device_list[device_name]['host']
-        print(f"The 'host' attribute for {device_name} is: {host_value}")
-    else:
-        print(f"Device {device_name} not found.")
-
-
 def read_command(file_path):
     with open(file_path, 'r') as file:
         command = file.read().splitlines()
     return command
 
 
-
-
 def sendChanges(device_list):
-    operation = input(" 1) Send a command to an specific device \n 2) Send a command to all devices\n")
+    print(" 1) Send a command to an specific device \n 2) Send a command to all devices\n")
+    operation = input("Select an option>")
     if operation == '1':
         device_name = input("Device name:")
         file_path = input("file path of the command list: ")
@@ -85,5 +73,3 @@ devices = {
 }
 
 sendChanges(devices)
-
-
