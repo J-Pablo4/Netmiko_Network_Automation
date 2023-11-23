@@ -3,10 +3,11 @@ import datetime
 import os
 import filecmp
 
+
 # start of writeFile function
-def writeFile(hostname, running_output):
+def write_file(hostname, running_output):
     # Define a file path before using this function
-    base_path = r"/home/nms"
+    base_path = r"/home/user"
     folder_path = os.path.join(base_path, hostname)
 
     if not os.path.exists(folder_path):
@@ -31,18 +32,20 @@ def writeFile(hostname, running_output):
 # End of writeFile function
 # Start of gatherConfigs function
 
-def gatherConfigs(router):
 
-    net_Connect = ConnectHandler(**router)
+def gather_configs(router):
+
+    net_connect = ConnectHandler(**router)
     print("----CONNECTED----")
-    net_Connect.enable()
+    net_connect.enable()
     print("----ENABLED----")
-    hostname = net_Connect.send_command('sh run | i host').split()[1]
-    running_config = net_Connect.send_command('show running-config')
-    writeFile(hostname, running_config)
-    print("----FILE WROTTEN----")
+    hostname = net_connect.send_command('sh run | i host').split()[1]
+    running_config = net_connect.send_command('show running-config')
+    write_file(hostname, running_config)
+    print("----FILE WRITTEN----")
 
 # End of gatherConfigs function
+
 
 # Devices
 devices = {
@@ -79,8 +82,8 @@ devices = {
     }
 }
 
-gatherConfigs(devices['r1'])
-gatherConfigs(devices['r2'])
-gatherConfigs(devices['r3'])
-gatherConfigs(devices['r4'])
-gatherConfigs(devices['r5'])
+gather_configs(devices['r1'])
+gather_configs(devices['r2'])
+gather_configs(devices['r3'])
+gather_configs(devices['r4'])
+gather_configs(devices['r5'])
